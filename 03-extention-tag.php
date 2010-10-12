@@ -26,7 +26,7 @@ class Project_Set_TokenParser extends Twig_TokenParser
     {
         $lineno = $token->getLine();
         $name = $this->parser->getStream()->expect(Twig_Token::NAME_TYPE)->getValue();
-        $this->parser->getStream()->expect(Twig_Token::NAME_TYPE, '=');
+        $this->parser->getStream()->expect(Twig_Token::OPERATOR_TYPE, '=');
         $value = $this->parser->getExpressionParser()->parseExpression();
 
         $this->parser->getStream()->expect(Twig_Token::BLOCK_END_TYPE);
@@ -43,17 +43,17 @@ class Project_Set_TokenParser extends Twig_TokenParser
 
 class Project_Set_Node extends Twig_Node
 {
-    public function __construct($name, Twig_Node_Expression $value, $lineno)
+    public function __construct($name, Twig_Node_Expression $value, $lineno, $tag = null)
     {
-        parent::__construct(array('value' => $value), array('name' => $name), $lineno);
+        parent::__construct(array('value' => $value), array('name' => $name), $lineno, $tag);
     }
 
     public function compile($compiler)
     {
     $compiler
         ->addDebugInfo($this)
-        ->write('$context[\''.$this['name'].'\'] = ')
-        ->subcompile($this->value)
+        ->write('$context[\''.$this->getAttribute('name').'\'] = ')
+        ->subcompile($this->getNode('value'))
         ->raw(";\n")
         ;
     }
