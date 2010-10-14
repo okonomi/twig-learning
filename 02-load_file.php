@@ -10,6 +10,6 @@ $twig = new Twig_Environment($loader, array(
                                  'cache' => __DIR__.'/compilation_cache',
                              ));
 
-$template = $twig->loadTemplate('index.html');
+$template = $twig->loadTemplate('02.twig');
 
 $template->display(array('name' => 'Fabien'));

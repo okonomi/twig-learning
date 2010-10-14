@@ -67,6 +67,6 @@ $twig = new Twig_Environment($loader, array(
                              ));
 $twig->addExtension(new Project_Twig_Extension());
 
-$template = $twig->loadTemplate('index2.html');
+$template = $twig->loadTemplate('03.twig');
 
 $template->display(array('name' => 'Fabien'));

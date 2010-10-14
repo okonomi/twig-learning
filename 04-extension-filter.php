@@ -29,6 +29,6 @@ $twig = new Twig_Environment($loader, array(
                              ));
 $twig->addExtension(new Project_Twig_Extension());
 
-$template = $twig->loadTemplate('index3.html');
+$template = $twig->loadTemplate('04.twig');
 
 $template->display(array());
